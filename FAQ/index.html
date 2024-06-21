@@ -118,19 +118,12 @@
 
 <div class="load-more-content-area" style="max-width: 700px;margin: auto;">
     <div class="accordion__wrapper">
-        <h1 class="accordion__title" style="    font-size: 36px;
-    font-weight: bold;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 0.9;
-    letter-spacing: -2.32px;
-    text-align: center;
-    margin-bottom: 30px;">FAQs</h1>
+        <h1 class="accordion__title" >FAQs</h1>
 
         <!-- Accordion 1  -->
         <div class="accordion">
             <div class="accordion__header">
-                <h3 class="accordion__question">What is the purpose of this pen?</h3>
+                <h3 class="accordion__question">What is the purpose of this pen 11?</h3>
                 <span class="accordion__icon">
                     <svg class="icon icon-plus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                         <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/>
@@ -272,56 +265,70 @@
 </div>
 
 <script type="text/javascript">
-document.addEventListener("DOMContentLoaded", () => {
-    const accordionHeaderEls = document.querySelectorAll(".accordion__header");
-    const accordionBoxEls = document.querySelectorAll(".accordion");
-    const loadMoreBtn = document.querySelector(".view-more-btn");
+    document.addEventListener("DOMContentLoaded", () => {
+        const accordionHeaderEls = document.querySelectorAll(".accordion__header");
+        const accordionBoxEls = document.querySelectorAll(".accordion");
+        const loadMoreBtn = document.querySelector(".view-more-btn");
 
-    // Add 'accordion--hidden' class to all accordion elements except the first one
-    accordionBoxEls.forEach((accordion, index) => {
-        if (index !== 0) {
-            accordion.classList.add('accordion--hidden');
-        }
-    });
-
-    loadMoreBtn.addEventListener("click", () => {
-        accordionBoxEls.forEach(accordion => {
-            accordion.classList.toggle('accordion--hidden');
+        // Add 'accordion--hidden' class to all accordion elements except the first one
+        accordionBoxEls.forEach((accordion, index) => {
+            if (index !== 0) {
+                accordion.classList.add("accordion--hidden");
+            }
         });
 
-        if (loadMoreBtn.innerHTML.includes("View More")) {
-            loadMoreBtn.innerHTML = 'View Less <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z"/></svg>';
-        } else {
-            loadMoreBtn.innerHTML = 'View More <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>';
-        }
-    });
+        loadMoreBtn.addEventListener("click", () => {
+            accordionBoxEls.forEach((accordion, index) => {
+                if (index !== 0) {
+                    accordion.classList.toggle("accordion--hidden");
+                }
+            });
 
-    accordionHeaderEls.forEach((header, index) => {
-        const content = accordionBoxEls[index].querySelector(".accordion__content");
-        const plusIcon = header.querySelector(".icon-plus");
-        const minusIcon = header.querySelector(".icon-minus");
+            if (loadMoreBtn.innerHTML.includes("View More")) {
+                loadMoreBtn.innerHTML =
+                    'View Less <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z"/></svg>';
+            } else {
+                loadMoreBtn.innerHTML =
+                    'View More <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>';
+            }
+        });
 
-        minusIcon.style.display = "none"; // Hide the minus icon initially
+        accordionHeaderEls.forEach((header, index) => {
+            const content = accordionBoxEls[index].querySelector(".accordion__content");
+            const plusIcon = header.querySelector(".icon-plus");
+            const minusIcon = header.querySelector(".icon-minus");
 
-        header.addEventListener("click", () => {
-            const isOpen = content.style.height === `${content.scrollHeight}px`;
+            minusIcon.style.display = "none"; // Hide the minus icon initially
 
-            accordionBoxEls.forEach((accordion, i) => {
-                const c = accordion.querySelector(".accordion__content");
-                const pi = accordion.querySelector(".icon-plus");
-                const mi = accordion.querySelector(".icon-minus");
-                const h = accordion.querySelector(".accordion__header");
-                const q = accordion.querySelector(".accordion__question");
+            header.addEventListener("click", () => {
+                const isOpen = content.style.height === `${content.scrollHeight}px`;
 
-                if (i === index) {
-                    if (!isOpen) {
-                        c.style.height = `${c.scrollHeight}px`;
-                        pi.style.display = "none";
-                        mi.style.display = "block";
-                        accordion.classList.add("accordion--borderbg");
-                        h.classList.add("accordion__header--bg");
-                        if (q) {
-                            q.classList.add("accordion__question--red");
+                accordionBoxEls.forEach((accordion, i) => {
+                    const c = accordion.querySelector(".accordion__content");
+                    const pi = accordion.querySelector(".icon-plus");
+                    const mi = accordion.querySelector(".icon-minus");
+                    const h = accordion.querySelector(".accordion__header");
+                    const q = accordion.querySelector(".accordion__question");
+
+                    if (i === index) {
+                        if (!isOpen) {
+                            c.style.height = `${c.scrollHeight}px`;
+                            pi.style.display = "none";
+                            mi.style.display = "block";
+                            accordion.classList.add("accordion--borderbg");
+                            h.classList.add("accordion__header--bg");
+                            if (q) {
+                                q.classList.add("accordion__question--red");
+                            }
+                        } else {
+                            c.style.height = "0px";
+                            pi.style.display = "block";
+                            mi.style.display = "none";
+                            accordion.classList.remove("accordion--borderbg");
+                            h.classList.remove("accordion__header--bg");
+                            if (q) {
+                                q.classList.remove("accordion__question--red");
+                            }
                         }
                     } else {
                         c.style.height = "0px";
@@ -333,24 +340,13 @@ document.addEventListener("DOMContentLoaded", () => {
                             q.classList.remove("accordion__question--red");
                         }
                     }
-                } else {
-                    c.style.height = "0px";
-                    pi.style.display = "block";
-                    mi.style.display = "none";
-                    accordion.classList.remove("accordion--borderbg");
-                    h.classList.remove("accordion__header--bg");
-                    if (q) {
-                        q.classList.remove("accordion__question--red");
-                    }
-                }
+                });
             });
         });
     });
-});
-
-
-
 </script>
+
+
 
 
 
